@@ -22,7 +22,6 @@ Feature: As a customer, I want to search multiple products
       | "TV"    | "1000" | "1500" |
       | "iPad"  | "500"  | "1000" |
 
-
   @Test3
   Scenario: Verify if the cart has all the items
     Given Go to cart
