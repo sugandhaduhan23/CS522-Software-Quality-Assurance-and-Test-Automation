@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite failures="1" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="7" time="133.941209">
+    <testcase classname="As a customer, I want to search multiple products" name="Add first product to cart" time="68.973188">
+        <system-out>
+            <![CDATA[Given Open the Chrome and go to Target website..............................passed
+When Select a category and subcategory......................................passed
+And Apply filters...........................................................passed
+And Select product..........................................................passed
+Then Take Screenshot........................................................passed
+And Add product to cart.....................................................passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="As a customer, I want to search multiple products" name="Add more products to the cart" time="32.522081">
+        <failure message="org.openqa.selenium.ElementClickInterceptedException: element click intercepted: Element &lt;button type=&quot;button&quot; aria-label=&quot;... for Samsung 75&amp;quot; Smart QLED 4K UHD TV (QN75Q60B) - Titan Gray&quot; data-test=&quot;shippingButton&quot; id=&quot;addToCartButtonOrTextIdFor87435753&quot; class=&quot;BaseButton-sc-j0jbcc-0 ButtonPrimary-sc-1qgspc1-0 fdaZTm eitQue&quot;&gt;Add to cart&lt;/button&gt; is not clickable at point (1237, 63). Other element would receive the click: &lt;nav data-test=&quot;@web/HeaderPrimaryNav&quot; id=&quot;headerPrimary&quot; class=&quot;styles__StyledNav-sc-vsz4u5-0 nlOoq&quot;&gt;...&lt;/nav&gt;&#10;  (Session info: chrome=108.0.5359.98)&#10;Build info: version: '4.5.0', revision: 'fe167b119a'&#10;System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '11.4', java.version: '11.0.13'&#10;Driver info: org.openqa.selenium.chrome.ChromeDriver&#10;Command: [71fd6a68788250d2c06022e392796c41, clickElement {id=772d2035-247a-49dd-8f14-c22ca8e1d99d}]&#10;Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 108.0.5359.98, chrome: {chromedriverVersion: 107.0.5304.62 (1eec40d3a576..., userDataDir: /var/folders/qb/lrmhzs7x2mx...}, goog:chromeOptions: {debuggerAddress: localhost:56302}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: MAC, proxy: Proxy(), se:cdp: ws://localhost:56302/devtoo..., se:cdpVersion: 108.0.5359.98, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}&#10;Element: [[ChromeDriver: chrome on MAC (71fd6a68788250d2c06022e392796c41)] -&gt; xpath: //button[text()='Add to cart']]&#10;Session ID: 71fd6a68788250d2c06022e392796c41&#10;&#9;at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)&#10;&#9;at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)&#10;&#9;at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)&#10;&#9;at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)&#10;&#9;at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)&#10;&#9;at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)&#10;&#9;at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)&#10;&#9;at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)&#10;&#9;at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:167)&#10;&#9;at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:142)&#10;&#9;at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:547)&#10;&#9;at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:257)&#10;&#9;at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:78)&#10;&#9;at StepDefinition.Target_E2E_Automation.select_and_add_to_cart(Target_E2E_Automation.java:175)&#10;&#9;at ✽.Select and add to cart(file:Feature/target.feature:19)&#10;">
+            <![CDATA[Given Go to home page.......................................................passed
+When Enter the product to be searched "TV"..................................passed
+And Apply filters to "TV" "1000" "1500".....................................passed
+Then Take Screenshot........................................................passed
+And Select and add to cart..................................................failed
+
+StackTrace:
+org.openqa.selenium.ElementClickInterceptedException: element click intercepted: Element <button type="button" aria-label="... for Samsung 75&quot; Smart QLED 4K UHD TV (QN75Q60B) - Titan Gray" data-test="shippingButton" id="addToCartButtonOrTextIdFor87435753" class="BaseButton-sc-j0jbcc-0 ButtonPrimary-sc-1qgspc1-0 fdaZTm eitQue">Add to cart</button> is not clickable at point (1237, 63). Other element would receive the click: <nav data-test="@web/HeaderPrimaryNav" id="headerPrimary" class="styles__StyledNav-sc-vsz4u5-0 nlOoq">...</nav>
+  (Session info: chrome=108.0.5359.98)
+Build info: version: '4.5.0', revision: 'fe167b119a'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '11.4', java.version: '11.0.13'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [71fd6a68788250d2c06022e392796c41, clickElement {id=772d2035-247a-49dd-8f14-c22ca8e1d99d}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 108.0.5359.98, chrome: {chromedriverVersion: 107.0.5304.62 (1eec40d3a576..., userDataDir: /var/folders/qb/lrmhzs7x2mx...}, goog:chromeOptions: {debuggerAddress: localhost:56302}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: MAC, proxy: Proxy(), se:cdp: ws://localhost:56302/devtoo..., se:cdpVersion: 108.0.5359.98, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on MAC (71fd6a68788250d2c06022e392796c41)] -> xpath: //button[text()='Add to cart']]
+Session ID: 71fd6a68788250d2c06022e392796c41
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:167)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:142)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:547)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:257)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:78)
+	at StepDefinition.Target_E2E_Automation.select_and_add_to_cart(Target_E2E_Automation.java:175)
+	at ✽.Select and add to cart(file:Feature/target.feature:19)
+]]>
+        </failure>
+    </testcase>
+    <testcase classname="As a customer, I want to search multiple products" name="Add more products to the cart 2" time="24.010679">
+        <system-out>
+            <![CDATA[Given Go to home page.......................................................passed
+When Enter the product to be searched "iPad"................................passed
+And Apply filters to "iPad" "500" "1000"....................................passed
+Then Take Screenshot........................................................passed
+And Select and add to cart..................................................passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="As a customer, I want to search multiple products" name="Navigate to cart" time="4.990237">
+        <system-out>
+            <![CDATA[Given Go to cart............................................................passed
+Then Take Screenshot........................................................passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="As a customer, I want to search multiple products" name="Verify cart total" time="0.24015">
+        <system-out>
+            <![CDATA[Given Cart is loaded........................................................passed
+Then Verifies Cart Amount...................................................passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="As a customer, I want to search multiple products" name="Verify delivery" time="0.326982">
+        <system-out>
+            <![CDATA[Given Cart is loaded........................................................passed
+Then Verifies Delivery Fee..................................................passed
+And Verifies Checkout Button................................................passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="As a customer, I want to search multiple products" name="Verify Checkout For Non-Auth Customers" time="2.877892">
+        <system-out>
+            <![CDATA[Given Cart is loaded........................................................passed
+Then Goes to checkout.......................................................passed
+And Validates Sign In Modal.................................................passed
+Then Close and quit.........................................................passed
+]]>
+        </system-out>
+    </testcase>
+</testsuite>
