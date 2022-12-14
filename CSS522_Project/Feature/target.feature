@@ -23,11 +23,24 @@ Feature: As a customer, I want to search multiple products
       | "iPad"  | "500"  | "1000" |
 
   @Test3
-  Scenario: Verify if the cart has all the items
+  Scenario: Navigate to cart
     Given Go to cart
     Then Take Screenshot
-    And Close and quit
 
+  @Test4
+  Scenario: Verify cart total
+    Given Cart is loaded
+    Then Verifies Cart Amount
 
+  @Test5
+  Scenario: Verify delivery
+    Given Cart is loaded
+    Then Verifies Delivery Fee
+    And Verifies Checkout Button
 
-
+  @Test6
+  Scenario: Verify Checkout For Non-Auth Customers
+    Given Cart is loaded
+    Then Goes to checkout
+    And Validates Sign In Modal
+    Then Close and quit

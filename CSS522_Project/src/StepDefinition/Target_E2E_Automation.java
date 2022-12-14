@@ -1,16 +1,17 @@
 package StepDefinition;
 
-
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 import java.io.File;
 import java.time.Duration;
@@ -22,6 +23,7 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 
 public class Target_E2E_Automation {
@@ -164,6 +166,7 @@ public class Target_E2E_Automation {
         driver.findElement(By.xpath("//a[text()='View cart & check out']")).click();
         this.product = "cart";
         Thread.sleep(3000);
+        logsMessage("Cart Loaded");
     }
 
     @Then("Take Screenshot")
@@ -175,6 +178,111 @@ public class Target_E2E_Automation {
         String formattedDate = myDateObj.format(myFormatObj);
         File DestFile = new File(screenshotPath + "//" + product + "_" + formattedDate + ".png");
         FileUtils.copyFile(SrcFile, DestFile);
+    }
+
+    void waitsForElement(String expectedElSelector, int expectedCount) { // explicit wait helper
+        WebDriverWait waitFor = new WebDriverWait(driver, Duration.ofSeconds(8));
+        waitFor.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.cssSelector(expectedElSelector), expectedCount));
+    }
+
+    void addWait() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+    }
+
+    int getPriceAsInt (String price) {
+        return Integer.parseInt(price.substring(1,3));
+    }
+
+    void logsMessage(String msg) {
+        System.out.println( "\t\t" + "\u2713" + "\t" + msg );
+    }
+
+    @Given("Cart is loaded")
+    public void checkIfCartLoaded () {
+        String listItemSelector = "div[data-test=\"cartItem\"]";
+        waitsForElement(listItemSelector, 0);
+        logsMessage("Cart Loaded");
+    }
+
+    @Then("Verifies Cart Amount")
+    public void verifiesCartTotalAmount () {
+        String listItemSelector = "div[data-test=\"cartItem\"]";
+        waitsForElement(listItemSelector, 0);
+
+        String totalAmtSelector = "div[data-test=\"cart-summary-total\"] p";
+        String totalPrice = driver.findElement(By.cssSelector(totalAmtSelector)).getText();
+        int priceAsInt = getPriceAsInt(totalPrice);
+        Assert.assertTrue(priceAsInt >= 50);
+
+        logsMessage("Verified Total Amount");
+        addWait();
+    }
+
+    @Then("Verifies Delivery Fee")
+    public void verifiesDeliveryInfo () {
+        String deliveryFeeSelector = "div[data-test=\"cart-summary-delivery\"] div div:nth-child(2) p";
+        String expectedDeliveryFee = "Free";
+        String deliveryFeeDisplayed = driver.findElement(By.cssSelector(deliveryFeeSelector)).getText();
+        Assert.assertTrue(deliveryFeeDisplayed.contains(expectedDeliveryFee));
+
+        logsMessage("Verified Delivery Fee");
+        addWait();
+    }
+
+    @Then("Verifies Checkout Button")
+    public void verifiesCheckoutBtn () {
+        String checkoutBtnSelector = "button[data-test=\"checkout-button\"]";
+        WebElement checkoutBtn = driver.findElement(By.cssSelector(checkoutBtnSelector));
+        Assert.assertTrue(checkoutBtn.getText().contains("check out"));
+        Assert.assertTrue(checkoutBtn.isEnabled());
+
+        logsMessage("Verified Checkout Button");
+        addWait();
+    }
+
+
+    @Then("Goes to checkout")
+    public void verifiesSignInModalForNonAuth () {
+        String checkoutBtnSelector = "button[data-test=\"checkout-button\"]";
+        WebElement checkoutBtn = driver.findElement(By.cssSelector(checkoutBtnSelector));
+        checkoutBtn.click();
+
+        String modalSelector = "div[data-test=\"@web/OverlayModal\"]";
+        waitsForElement(modalSelector, 0);
+
+        logsMessage("Sign In Modal loaded for non-auth users");
+        addWait();
+    }
+
+    @Then("Validates Sign In Modal")
+    public void validatesSignInForm () {
+        WebElement title = driver.findElement(By.cssSelector("div[data-test=\"@web/OverlayModal\"] div[data-test=\"content-wrapper\"] h2"));
+        String expectedSignInModalTitle = "Sign into your Target account";
+        Assert.assertTrue(title.getText().contains(expectedSignInModalTitle));
+        logsMessage("Verified Title");
+
+        String invalidTestUserName = "dfgfg@*(";
+        String invalidTestPassword = "abc";
+        driver.findElement(By.cssSelector("#username")).sendKeys(invalidTestUserName);
+        addWait();
+
+        driver.findElement(By.cssSelector("#password")).sendKeys(invalidTestPassword);
+        addWait();
+
+        driver.findElement(By.cssSelector("#login")).click();
+        addWait();
+
+        String usernameErrorDisplay = "#username--ErrorMessage";
+        List<WebElement> usernameErrorMsg = driver.findElements(By.cssSelector(usernameErrorDisplay));
+        Assert.assertTrue(usernameErrorMsg.size() > 0);
+        Assert.assertTrue(usernameErrorMsg.contains("Please enter a valid email or phone number"));
+        logsMessage("Verified Username field validations");
+
+        String passwordErrorDisplay = "#password--ErrorMessage";
+        List<WebElement> passwordErrMsg = driver.findElements(By.cssSelector(passwordErrorDisplay));
+        Assert.assertTrue(passwordErrMsg.size() > 0);
+        Assert.assertTrue(passwordErrMsg.contains("Please enter a valid password"));
+        logsMessage("Verified Password field validations");
     }
 
     @Then("Close and quit")
