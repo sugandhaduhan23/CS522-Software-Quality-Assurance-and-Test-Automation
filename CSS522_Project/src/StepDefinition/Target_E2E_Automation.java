@@ -38,7 +38,7 @@ public class Target_E2E_Automation {
     String screenshotPath = "../CS522Screenshots";
 
     @Given("Open the Chrome and go to Target website")
-    public void open_the_chrome_and_go_to_macys_website() {
+    public void open_the_chrome_and_go_to_target_website() {
         System.setProperty(systemProp, driverPath);
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-blink-features=AutomationControlled");
@@ -190,7 +190,8 @@ public class Target_E2E_Automation {
     }
 
     int getPriceAsInt (String price) {
-        return Integer.parseInt(price.substring(1,3));
+        return Math.round(Float.parseFloat(price.replaceAll("[$,]","")));
+        //return Integer.parseInt(price.replace(",","").substring(1,4));
     }
 
     void logsMessage(String msg) {
@@ -208,12 +209,10 @@ public class Target_E2E_Automation {
     public void verifiesCartTotalAmount () {
         String listItemSelector = "div[data-test=\"cartItem\"]";
         waitsForElement(listItemSelector, 0);
-
         String totalAmtSelector = "div[data-test=\"cart-summary-total\"] p";
         String totalPrice = driver.findElement(By.cssSelector(totalAmtSelector)).getText();
         int priceAsInt = getPriceAsInt(totalPrice);
         Assert.assertTrue(priceAsInt >= 50);
-
         logsMessage("Verified Total Amount");
         addWait();
     }
@@ -224,7 +223,6 @@ public class Target_E2E_Automation {
         String expectedDeliveryFee = "Free";
         String deliveryFeeDisplayed = driver.findElement(By.cssSelector(deliveryFeeSelector)).getText();
         Assert.assertTrue(deliveryFeeDisplayed.contains(expectedDeliveryFee));
-
         logsMessage("Verified Delivery Fee");
         addWait();
     }
@@ -235,7 +233,6 @@ public class Target_E2E_Automation {
         WebElement checkoutBtn = driver.findElement(By.cssSelector(checkoutBtnSelector));
         Assert.assertTrue(checkoutBtn.getText().contains("check out"));
         Assert.assertTrue(checkoutBtn.isEnabled());
-
         logsMessage("Verified Checkout Button");
         addWait();
     }
@@ -246,10 +243,8 @@ public class Target_E2E_Automation {
         String checkoutBtnSelector = "button[data-test=\"checkout-button\"]";
         WebElement checkoutBtn = driver.findElement(By.cssSelector(checkoutBtnSelector));
         checkoutBtn.click();
-
         String modalSelector = "div[data-test=\"@web/OverlayModal\"]";
         waitsForElement(modalSelector, 0);
-
         logsMessage("Sign In Modal loaded for non-auth users");
         addWait();
     }
@@ -260,28 +255,24 @@ public class Target_E2E_Automation {
         String expectedSignInModalTitle = "Sign into your Target account";
         Assert.assertTrue(title.getText().contains(expectedSignInModalTitle));
         logsMessage("Verified Title");
-
         String invalidTestUserName = "dfgfg@*(";
         String invalidTestPassword = "abc";
         driver.findElement(By.cssSelector("#username")).sendKeys(invalidTestUserName);
         addWait();
-
         driver.findElement(By.cssSelector("#password")).sendKeys(invalidTestPassword);
         addWait();
 
         driver.findElement(By.cssSelector("#login")).click();
         addWait();
 
-        String usernameErrorDisplay = "#username--ErrorMessage";
-        List<WebElement> usernameErrorMsg = driver.findElements(By.cssSelector(usernameErrorDisplay));
-        Assert.assertTrue(usernameErrorMsg.size() > 0);
-        Assert.assertTrue(usernameErrorMsg.contains("Please enter a valid email or phone number"));
+        WebElement usernameErrorMsg = driver.findElement(By.id("username--ErrorMessage"));
+        Assert.assertTrue(usernameErrorMsg.isDisplayed());
+        Assert.assertTrue(usernameErrorMsg.getText().equals("Please enter a valid email or phone number"));
         logsMessage("Verified Username field validations");
 
-        String passwordErrorDisplay = "#password--ErrorMessage";
-        List<WebElement> passwordErrMsg = driver.findElements(By.cssSelector(passwordErrorDisplay));
-        Assert.assertTrue(passwordErrMsg.size() > 0);
-        Assert.assertTrue(passwordErrMsg.contains("Please enter a valid password"));
+        WebElement passwordErrMsg = driver.findElement(By.id("password--ErrorMessage"));
+        Assert.assertTrue(passwordErrMsg.isDisplayed());
+        Assert.assertTrue(passwordErrMsg.getText().equals("Please enter a valid password"));
         logsMessage("Verified Password field validations");
     }
 

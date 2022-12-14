@@ -11,7 +11,7 @@ Feature: As a customer, I want to search multiple products
     And  Add product to cart
 
   @Test2
-  Scenario Outline: Add second product to the cart
+  Scenario Outline: Add more products to the cart
     Given Go to home page
     When Enter the product to be searched <product>
     And Apply filters to <product> <price1> <price2>
