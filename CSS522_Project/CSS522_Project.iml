@@ -32,5 +32,6 @@
     </orderEntry>
     <orderEntry type="library" exported="" name="io.cucumber.junit" level="project" />
     <orderEntry type="library" exported="" name="io.cucumber.java" level="project" />
+    <orderEntry type="library" name="zenframework.z8.dependencies.commons.log4j.1.2.17" level="project" />
   </component>
 </module>
