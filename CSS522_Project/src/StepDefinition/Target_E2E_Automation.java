@@ -64,9 +64,9 @@ public class Target_E2E_Automation {
         logger.debug("Inside select a category and subcategory method");
         driver.findElement(By.linkText("Categories")).click();
         Thread.sleep(2000);
-        driver.findElement(By.cssSelector("#overlay-5 > div:nth-child(1) > div > div > a:nth-child(4)>div")).click();
+        driver.findElement(By.linkText("Christmas")).click();
         Thread.sleep(2000);
-        WebElement element = driver.findElement(By.cssSelector("#overlay-5 > div:nth-child(1) > div > div:nth-child(2) > a:nth-child(8)>div"));
+        WebElement element = driver.findElement(By.linkText("Christmas Lights"));
         product = element.getText();
         element.click();
         Thread.sleep(2000);
@@ -84,19 +84,23 @@ public class Target_E2E_Automation {
         jse.executeScript("arguments[0].click()", element1);
         jse.executeScript("arguments[0].click()", element2);
         Thread.sleep(2000);
-        driver.findElement(By.xpath("/html/body/div[26]/div/div/div[3]/button[2]")).click();
+        driver.findElement(By.xpath("//button[text()='Update']")).click();
         Thread.sleep(5000);
     }
 
     @When("Select product")
     public void select_product() throws Exception {
         logger.debug("Inside select product method");
+        //Select Icicle Lights
         driver.findElement(By.xpath("//*[@id=\"pageBodyContainer\"]/div[1]/div/div[9]/div/div[1]/div[2]/div/section/div/div[1]/div/div/div[1]/div[1]")).click();
         Thread.sleep(2000);
+        //Select product from the list
         driver.findElement(By.xpath("//*[@id=\"pageBodyContainer\"]/div[1]/div[2]/div[2]/div/div[4]/div/div[1]/button[3]")).click();
         Thread.sleep(2000);
+        //Click on Shipping
         driver.findElement(By.xpath("//*[@id=\"pageBodyContainer\"]/div[1]/div[2]/div[2]/div/div[4]/div/div[2]/div[2]/div/div/div")).click();
         Thread.sleep(2000);
+        //Select Required Quantity
         List<WebElement> list = driver.findElements(By.cssSelector("body > div.styles__SpeechBubbleContent-sc-p8ctp0-5.dBKrEq.styles__AnimatedPopoverInternal-sc-uz1fwu-0.cKParx > div:nth-child(1) > ul li"));
         for (WebElement e : list) {
              if(e.getText().equals("2")){
